@@ -1,9 +1,5 @@
 package com.rrt.rrtbackend.controller;
-
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,12 +20,11 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody User user) {
-        return ResponseEntity.ok(authService.register(user));
+        return authService.register(user);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Map<String, String> loginRequest) {
-        String token = authService.login(loginRequest.get("email"), loginRequest.get("password"));
-        return ResponseEntity.ok(token);
+    public ResponseEntity<String> login(@RequestBody User user) {
+        return authService.login(user);
     }
 }
