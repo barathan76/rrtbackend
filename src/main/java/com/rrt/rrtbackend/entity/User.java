@@ -1,8 +1,6 @@
 package com.rrt.rrtbackend.entity;
 
-
 import jakarta.persistence.*;
-
 
 @Entity
 @Table(name = "users")
@@ -18,8 +16,13 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    private String firstName;
+    private String lastName;
+    private String mobileNumber;
+
     // Constructors
-    public User() {}
+    public User() {
+    }
 
     public User(String email, String password) {
         this.email = email;
@@ -34,10 +37,12 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return email;
     }
-    public void setEmail(String email){
+
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -48,8 +53,33 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
     @Override
     public String toString() {
-        return "User{ email = "+email+", password = "+password+"}";
+        return "User{ email = " + email + ", password = " + password + "}";
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 }
