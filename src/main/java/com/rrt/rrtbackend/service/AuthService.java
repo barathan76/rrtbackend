@@ -1,5 +1,9 @@
 package com.rrt.rrtbackend.service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -7,8 +11,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.rrt.rrtbackend.entity.AuthRequest;
+import com.rrt.rrtbackend.entity.AuthenticatedDevice;
 import com.rrt.rrtbackend.entity.User;
+import com.rrt.rrtbackend.repository.AuthenticatedDeviceRepository;
 import com.rrt.rrtbackend.repository.UserRepository;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.transaction.Transactional;
 
 
 
@@ -19,18 +30,24 @@ public class AuthService {
     private UserRepository userRepository;
 
     @Autowired
+    private AuthenticatedDeviceRepository authenticatedDeviceRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Value("${jwt.secret}")
     private String jwtSecret;
 
-    public ResponseEntity<String> register(User user) {
+    public ResponseEntity<String> register(AuthRequest authRequest) {
         try{
-            User existingUser = userRepository.findByEmail(user.getEmail()).orElse(null);
+            User existingUser = userRepository.findByEmail(authRequest.getEmail()).orElse(null);
             if(existingUser == null){
+                User user = new User();
+                user.setEmail(authRequest.getEmail());
+
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return ResponseEntity.ok(user.getId()+"");
+        return ResponseEntity.ok(generateAuthResponse(user,authRequest.getDeviceId()));
             }else{
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
             }
@@ -38,15 +55,17 @@ public class AuthService {
            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Registration failed : "+e.getMessage());
         }   
     }
+    @Transactional
+    public void logout(String token){
+        authenticatedDeviceRepository.deleteByToken(token);
+    }
 
-    public  ResponseEntity<String> login(User user){
-         System.err.println(user);
+    public  ResponseEntity<String> login(AuthRequest authRequest){
     
          try{
-            User exUser = userRepository.findByEmail(user.getEmail()).orElse(null);
-            System.err.println(exUser);
-            if(exUser!=null && passwordEncoder.matches(user.getPassword(), exUser.getPassword())){
-                return ResponseEntity.ok(exUser.getId()+"");
+            User exUser = userRepository.findByEmail(authRequest.getEmail()).orElse(null);
+            if(exUser!=null && passwordEncoder.matches(authRequest.getPassword(), exUser.getPassword())){
+                return ResponseEntity.ok(generateAuthResponse(exUser,authRequest.getDeviceId()));
             }else{
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Credentials");
             }
@@ -57,15 +76,27 @@ public class AuthService {
         
     }
 
+    private String generateAuthResponse(User user, String deviceId){
+        String token =  UUID.randomUUID().toString();
+        // String token = generateToken(user.getEmail());
+        AuthenticatedDevice device = new AuthenticatedDevice();
+        device.setUser(user);
+        device.setToken(token);
+        device.setDevice(deviceId);
+        device.setLoginTime(LocalDateTime.now());
+        authenticatedDeviceRepository.save(device);
+        return token;
+
+    }
+
     
 
-    // private String generateToken(String email) {
-    //     return Jwts.builder()
-    //             .setSubject(email)
-    //             .setIssuedAt(new Date())
-    //             .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hour
-    //             .signWith(SignatureAlgorithm.HS512, jwtSecret)
-    //             .compact();
-    // }
+    private String generateToken(String email) {
+        return Jwts.builder()
+                .setSubject(email)
+                .setIssuedAt(new Date())// 1 hour
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
+    }
 }
 
