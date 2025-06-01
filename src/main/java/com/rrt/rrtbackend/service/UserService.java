@@ -3,8 +3,8 @@ package com.rrt.rrtbackend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rrt.rrtbackend.entity.User;
-import com.rrt.rrtbackend.entity.UserProfile;
+import com.rrt.rrtbackend.entity.user.User;
+import com.rrt.rrtbackend.entity.user.UserProfile;
 import com.rrt.rrtbackend.repository.UserRepository;
 import com.rrt.rrtbackend.utility.JwtUtil;
 
@@ -34,6 +34,7 @@ public class UserService {
         user.setFirstName(profile.getFirstName());
         user.setLastName(profile.getLastName());
         user.setMobileNumber(profile.getMobileNumber());
+        user.setProfileImage(profile.getProfileImage());
         userRepository.save(user);
     }
 }

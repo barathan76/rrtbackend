@@ -1,4 +1,7 @@
-package com.rrt.rrtbackend.entity;
+package com.rrt.rrtbackend.entity.user;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -19,6 +22,12 @@ public class User {
     private String firstName;
     private String lastName;
     private String mobileNumber;
+    @Lob
+    @Column(name = "profileImage", length = 100000)
+    private byte[] profileImage;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Address> addresses = new ArrayList<>();
 
     // Constructors
     public User() {
@@ -32,6 +41,14 @@ public class User {
     // Getters and Setters
     public Long getId() {
         return id;
+    }
+
+    public byte[] getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(byte[] profileImage) {
+        this.profileImage = profileImage;
     }
 
     public void setId(Long id) {

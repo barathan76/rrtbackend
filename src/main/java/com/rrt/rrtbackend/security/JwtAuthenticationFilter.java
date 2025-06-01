@@ -11,7 +11,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.rrt.rrtbackend.entity.User;
+import com.rrt.rrtbackend.entity.user.User;
 import com.rrt.rrtbackend.repository.UserRepository;
 import com.rrt.rrtbackend.utility.JwtUtil;
 

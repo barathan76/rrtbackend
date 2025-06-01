@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rrt.rrtbackend.entity.User;
-import com.rrt.rrtbackend.entity.UserProfile;
+import com.rrt.rrtbackend.entity.user.User;
+import com.rrt.rrtbackend.entity.user.UserProfile;
 import com.rrt.rrtbackend.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;

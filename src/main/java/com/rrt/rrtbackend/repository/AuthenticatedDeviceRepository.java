@@ -2,8 +2,8 @@ package com.rrt.rrtbackend.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.rrt.rrtbackend.entity.User;
 import com.rrt.rrtbackend.entity.authentication.AuthenticatedDevice;
+import com.rrt.rrtbackend.entity.user.User;
 
 import java.util.List;
 import java.util.Optional;

@@ -2,7 +2,7 @@ package com.rrt.rrtbackend.entity.authentication;
 
 import java.time.LocalDateTime;
 
-import com.rrt.rrtbackend.entity.User;
+import com.rrt.rrtbackend.entity.user.User;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

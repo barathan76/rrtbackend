@@ -11,12 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.rrt.rrtbackend.entity.User;
 import com.rrt.rrtbackend.entity.authentication.AuthRequest;
 import com.rrt.rrtbackend.entity.authentication.AuthenticatedDevice;
 import com.rrt.rrtbackend.entity.authentication.ChangePassword;
 import com.rrt.rrtbackend.entity.authentication.ForgotPassword;
 import com.rrt.rrtbackend.entity.authentication.ResetPassword;
+import com.rrt.rrtbackend.entity.user.User;
 import com.rrt.rrtbackend.repository.AuthenticatedDeviceRepository;
 import com.rrt.rrtbackend.repository.UserRepository;
 import com.rrt.rrtbackend.utility.JwtUtil;

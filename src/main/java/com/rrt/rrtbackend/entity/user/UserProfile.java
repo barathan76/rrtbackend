@@ -1,10 +1,20 @@
-package com.rrt.rrtbackend.entity;
+package com.rrt.rrtbackend.entity.user;
 
 public class UserProfile {
     private String email;
     private String firstName;
     private String lastName;
     private String mobileNumber;
+
+    private byte[] profileImage;
+
+    public byte[] getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(byte[] profileImage) {
+        this.profileImage = profileImage;
+    }
 
     public UserProfile() {
 
@@ -15,6 +25,7 @@ public class UserProfile {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.mobileNumber = user.getMobileNumber();
+        this.profileImage = user.getProfileImage();
     }
 
     public String getEmail() {
