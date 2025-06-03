@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rrt.rrtbackend.entity.Product;
 import com.rrt.rrtbackend.service.ProductsService;
 
-import jakarta.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "*")
 @RestController
