@@ -5,11 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rrt.rrtbackend.entity.Product;
 import com.rrt.rrtbackend.service.ProductsService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -21,6 +24,11 @@ public class ProductsController {
     @GetMapping("/get_products")
     public List<Product> getProducts() {
         return productsService.getAllProducts();
+    }
+
+    @GetMapping("/search/{title}")
+    public List<Product> searchProducts(@PathVariable String title){
+        return productsService.searchProductsByTitle(title);
     }
 
 }

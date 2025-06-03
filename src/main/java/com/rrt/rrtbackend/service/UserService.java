@@ -37,4 +37,5 @@ public class UserService {
         user.setProfileImage(profile.getProfileImage());
         userRepository.save(user);
     }
+    
 }

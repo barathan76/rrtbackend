@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rrt.rrtbackend.entity.user.Address;
+import com.rrt.rrtbackend.entity.user.UserAddress;
 import com.rrt.rrtbackend.service.AddressService;
 
 @CrossOrigin(origins = "*")
@@ -27,18 +27,18 @@ public class AddressController {
     private AddressService addressService;
 
     @GetMapping
-    public List<Address> getAllAddresses(@RequestHeader("Authorization") String token) {
+    public List<UserAddress> getAllAddresses(@RequestHeader("Authorization") String token) {
         return addressService.getAllAddresses(token);
     }
 
     @PostMapping
-    public Address addAddress(@RequestBody Address address, @RequestHeader("Authorization") String token) {
+    public UserAddress addAddress(@RequestBody UserAddress address, @RequestHeader("Authorization") String token) {
         return addressService.addAddress(token, address);
     }
 
     @PutMapping("/{id}")
-    public Address updateAddress(@PathVariable Long id,
-            @RequestBody Address address,
+    public UserAddress updateAddress(@PathVariable Long id,
+            @RequestBody UserAddress address,
             @RequestHeader("Authorization") String token) {
         return addressService.updateAddress(id, address, token);
     }

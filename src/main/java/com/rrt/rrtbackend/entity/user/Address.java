@@ -34,6 +34,18 @@ public class Address {
     public Long getAddressId() {
         return addressId;
     }
+    public Address(){}
+    public Address(UserAddress address){
+        this.name = address.getName();
+        this.number = address.getNumber();
+        this.pincode = address.getPincode();
+        this.state = address.getState();
+        this.city = address.getCity();
+        this.addressLine1 = address.getAddressLine1();
+        this.addressLine2 = address.getAddressLine2();
+        this.addressType = address.getAddressType();
+        this.landMark = address.getLandMark();
+    }
 
     public void setAddressId(Long addressId) {
         this.addressId = addressId;

@@ -1,6 +1,7 @@
 package com.rrt.rrtbackend.entity.user;
 
 public class UserAddress {
+   private long id;
     private String name;
     private String number;
     private int pincode;
@@ -11,8 +12,9 @@ public class UserAddress {
     private String addressType;
     private String landMark;
 
-    public UserAddress(String name, String number, int pincode, String state, String city, String addressLine1,
+    public UserAddress(long id,String name, String number, int pincode, String state, String city, String addressLine1,
             String addressLine2, String addressType, String landMark) {
+        this.id = id;
         this.name = name;
         this.number = number;
         this.pincode = pincode;
@@ -25,6 +27,7 @@ public class UserAddress {
     }
 
     public UserAddress(Address address) {
+        this.id = address.getAddressId();
         this.name = address.getName();
         this.number = address.getNumber();
         this.pincode = address.getPincode();
@@ -109,6 +112,14 @@ public class UserAddress {
 
     public void setLandMark(String landMark) {
         this.landMark = landMark;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 }
