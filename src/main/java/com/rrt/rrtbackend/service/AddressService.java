@@ -13,6 +13,8 @@ import com.rrt.rrtbackend.repository.AddressRepository;
 import com.rrt.rrtbackend.repository.UserRepository;
 import com.rrt.rrtbackend.utility.JwtUtil;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class AddressService {
 
@@ -61,8 +63,10 @@ public class AddressService {
         return new UserAddress(addressRepository.save(address));
     }
 
+    @Transactional
     public void deleteAddress(Long id, String token) {
         User user = getUserFromToken(token);
+        System.err.println(id);
         Address address = addressRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Address not found"));
 

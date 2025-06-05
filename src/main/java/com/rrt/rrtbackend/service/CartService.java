@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rrt.rrtbackend.entity.CartItem;
-import com.rrt.rrtbackend.entity.CartItemDTO;
-import com.rrt.rrtbackend.entity.Product;
+import com.rrt.rrtbackend.entity.cart.CartItem;
+import com.rrt.rrtbackend.entity.cart.CartItemDTO;
+import com.rrt.rrtbackend.entity.product.Product;
 import com.rrt.rrtbackend.entity.user.User;
 import com.rrt.rrtbackend.repository.CartItemRepository;
 import com.rrt.rrtbackend.repository.ProductsRepository;
@@ -17,6 +17,7 @@ import com.rrt.rrtbackend.repository.UserRepository;
 import com.rrt.rrtbackend.utility.JwtUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 
 @Service
 public class CartService {
@@ -50,13 +51,19 @@ public class CartService {
         item.setQuantity(quantity);
         return new CartItemDTO(cartItemRepository.save(item));
     }
-
+    @Transactional
     public void removeItem(Long userId,int productId){
         cartItemRepository.deleteByUserIdAndProductId(userId,productId);
     }
 
     public List<CartItemDTO> getCartItems(Long userId){
         return cartItemRepository.findByUserId(userId).stream().map(CartItemDTO :: new).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void clearCart(Long userId){
+        System.err.println("Clear cart called");
+        cartItemRepository.deleteByUserId(userId);
     }
 
 

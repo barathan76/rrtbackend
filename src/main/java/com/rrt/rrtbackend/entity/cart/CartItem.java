@@ -1,5 +1,6 @@
-package com.rrt.rrtbackend.entity;
+package com.rrt.rrtbackend.entity.cart;
 
+import com.rrt.rrtbackend.entity.product.Product;
 import com.rrt.rrtbackend.entity.user.User;
 
 import jakarta.persistence.Entity;

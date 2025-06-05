@@ -1,4 +1,4 @@
-package com.rrt.rrtbackend.entity.user;
+package com.rrt.rrtbackend.entity.cart;
 
 public class CartItemRequest {
     private int productId;

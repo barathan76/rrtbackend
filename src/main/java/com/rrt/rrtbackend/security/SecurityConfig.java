@@ -30,6 +30,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/products/**").authenticated()
                         .requestMatchers("/api/order/**").authenticated()
                         .requestMatchers("/api/user/cart/**").authenticated()
+                        .requestMatchers("/api/user/order/**").authenticated()
                         .requestMatchers("/api/address/**").authenticated() // Orders
                         .anyRequest().denyAll())
                 .sessionManagement(session -> session

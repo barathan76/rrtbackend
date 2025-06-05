@@ -1,4 +1,6 @@
-package com.rrt.rrtbackend.entity;
+package com.rrt.rrtbackend.entity.cart;
+
+import com.rrt.rrtbackend.entity.product.Product;
 
 public class CartItemDTO {
     private Long id;

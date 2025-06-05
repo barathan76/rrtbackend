@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rrt.rrtbackend.entity.Product;
+import com.rrt.rrtbackend.entity.product.Product;
 import com.rrt.rrtbackend.service.ProductsService;
 
 

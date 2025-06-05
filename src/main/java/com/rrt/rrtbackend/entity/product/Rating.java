@@ -1,4 +1,4 @@
-package com.rrt.rrtbackend.entity;
+package com.rrt.rrtbackend.entity.product;
 
 import jakarta.persistence.Embeddable;
 

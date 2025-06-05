@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rrt.rrtbackend.entity.CartItemDTO;
-import com.rrt.rrtbackend.entity.user.CartItemRequest;
+import com.rrt.rrtbackend.entity.cart.CartItemDTO;
+import com.rrt.rrtbackend.entity.cart.CartItemRequest;
+import com.rrt.rrtbackend.entity.user.User;
 import com.rrt.rrtbackend.service.CartService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -53,9 +54,17 @@ public class CartItemController {
 
     @DeleteMapping("/remove/{productId}")
     public ResponseEntity<String> deleteItem(@PathVariable int productId,HttpServletRequest request) {
+        System.out.println("Product Id " +productId );
         Long userId = cartService.getUserFromRequest(request).getId();
         cartService.removeItem(userId, productId);
         return ResponseEntity.ok("Item removed");
+    }
+
+    @DeleteMapping("/clear")
+    public ResponseEntity<String> clearCart(HttpServletRequest request){
+        Long userId = cartService.getUserFromRequest(request).getId();
+        cartService.clearCart(userId);
+        return ResponseEntity.ok("Cart cleared");
     }
     
     

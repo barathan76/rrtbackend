@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rrt.rrtbackend.entity.Product;
+import com.rrt.rrtbackend.entity.product.Product;
 import com.rrt.rrtbackend.repository.ProductsRepository;
 
 @Service

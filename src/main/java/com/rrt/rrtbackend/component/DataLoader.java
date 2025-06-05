@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rrt.rrtbackend.entity.Product;
+import com.rrt.rrtbackend.entity.product.Product;
 import com.rrt.rrtbackend.repository.ProductsRepository;
 
 @Component
