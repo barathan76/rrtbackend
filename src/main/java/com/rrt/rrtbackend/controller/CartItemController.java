@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rrt.rrtbackend.entity.cart.CartItemDTO;
 import com.rrt.rrtbackend.entity.cart.CartItemRequest;
-import com.rrt.rrtbackend.entity.user.User;
 import com.rrt.rrtbackend.service.CartService;
 
 import jakarta.servlet.http.HttpServletRequest;

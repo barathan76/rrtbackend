@@ -44,6 +44,7 @@ public class ProductWishlistService {
     }
 
     public boolean isWishlisted(String token, int productId) {
+        System.err.println("isWishlist is called");
         User user = getUserFromToken(token);
         Product product = productsRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
@@ -51,18 +52,21 @@ public class ProductWishlistService {
     }
 
     public void toggleWishlist(String token, int productId) {
+        System.err.println("toggleWishlist is called");
         User user = getUserFromToken(token);
         Product product = productsRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
         Optional<ProductWishlist> existing = wishlistRepository.findByUserAndProduct(user, product);
         if (existing.isPresent()) {
+            System.err.println("already exists");
             wishlistRepository.delete(existing.get());
         } else {
             ProductWishlist wishlist = new ProductWishlist();
             wishlist.setUser(user);
             wishlist.setProduct(product);
             wishlistRepository.save(wishlist);
+            System.err.println("item added to wishlist");
         }
     }
 }

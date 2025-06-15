@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.rrt.rrtbackend.entity.cart.CartItem;
-import com.rrt.rrtbackend.entity.user.User;
 
 public interface CartItemRepository extends JpaRepository<CartItem,Long>{
     List<CartItem> findByUserId(Long userId);
